@@ -6,9 +6,27 @@ var first = Console.ReadLine();
 Console.WriteLine("Enter the second number");
 var second = Console.ReadLine();
 
-var f = int.Parse(first);
-var s = int.Parse(second);
+try
+{
+    var f = int.Parse(first);
+    var s = int.Parse(second);
 
-var result = f + s;
+    var result = f + s;
 
-Console.WriteLine($"The result is {result}");
+    Console.WriteLine($"The result is {result}");
+}
+/*catch (Exception e)
+{
+    Console.WriteLine("Improper format or value out of range");
+}*/
+catch (FormatException e)
+{
+    Console.WriteLine("Improper format");
+    Console.WriteLine(e.Message);
+}
+catch (OverflowException e)
+{
+    Console.WriteLine("Number too big or too small");
+    Console.WriteLine(e.Message);
+}
+
