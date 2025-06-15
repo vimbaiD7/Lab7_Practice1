@@ -1,4 +1,5 @@
-﻿namespace ReflectionTutorial;
+﻿
+namespace ReflectionTutorial;
 
 public class Car
 {
@@ -26,14 +27,13 @@ public class Car
 
     public void AddFuel(double amount)
     {
+        ArgumentOutOfRangeException.ThrowIfLessThan(amount, 0, nameof(amount));
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(amount, TankCapacity - _fuelLevel, nameof(amount));
         if (amount + _fuelLevel > TankCapacity)
-        {
-            _fuelLevel = TankCapacity;
-        }
-        else
-        {
-            _fuelLevel += amount;
-        }
+            throw new FuelOverflowException(amount, _fuelLevel, TankCapacity);
+
+        _fuelLevel += amount;
+        
     }
 
     public void Drive(double distance)
